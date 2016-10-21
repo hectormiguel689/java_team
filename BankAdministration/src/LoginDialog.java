@@ -18,10 +18,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class LoginDialog extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField txtUsername;
 	private JPasswordField pwdPassword;
 	private String DEFAULTUSER = "hector689";
 	private String DEFAULTPASS = "123456";
+	private boolean isGranted = false;
 
 	/**
 	 * Launch the application.
@@ -90,6 +95,11 @@ public class LoginDialog extends JFrame {
 				String password = pwdPassword.getText();
 			if(username.equals(DEFAULTUSER) && password.equals(DEFAULTPASS)){
 				accessGranted.setText("ACCESS GRANTED!");
+				isGranted = true;
+			}
+			else{
+				accessGranted.setText("ACCESS DENIED!");
+				isGranted = false;
 			}
 				
 			}
@@ -102,4 +112,9 @@ public class LoginDialog extends JFrame {
 		getContentPane().add(btnCancel);
 	
 	}
+
+	public boolean isGranted() {
+		return isGranted;
+	}
+	
 }
