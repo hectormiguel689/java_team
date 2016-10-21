@@ -7,15 +7,20 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
 import java.awt.FlowLayout;
+import java.awt.Window;
+
 import javax.swing.JTextArea;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class LoginDialog extends JFrame {
 	/**
@@ -27,25 +32,7 @@ public class LoginDialog extends JFrame {
 	private String DEFAULTUSER = "hector689";
 	private String DEFAULTPASS = "123456";
 	private boolean isGranted = false;
-	static LoginDialog frame = new LoginDialog();
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
+		/**
 	 * Create the frame.
 	 */
 	public LoginDialog() {
@@ -97,6 +84,8 @@ public class LoginDialog extends JFrame {
 			if(username.equals(DEFAULTUSER) && password.equals(DEFAULTPASS)){
 				accessGranted.setText("ACCESS GRANTED!");
 				isGranted = true;
+				Main.loginWindow.dispose();
+				
 			}
 			else{
 				accessGranted.setText("ACCESS DENIED!");
@@ -108,17 +97,11 @@ public class LoginDialog extends JFrame {
 		btnLogin.setBounds(82, 188, 114, 25);
 		getContentPane().add(btnLogin);
 		
-		JButton btnCancel = new JButton("CANCEL");
-		btnCancel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				frame.dispose();
+		JButton btnClear = new JButton("Clear");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnCancel.setBounds(219, 188, 114, 25);
-		getContentPane().add(btnCancel);
-		
-		JButton btnClear = new JButton("Clear");
 		btnClear.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -126,7 +109,7 @@ public class LoginDialog extends JFrame {
 				pwdPassword.setText("");
 			}
 		});
-		btnClear.setBounds(158, 225, 114, 25);
+		btnClear.setBounds(208, 188, 114, 25);
 		getContentPane().add(btnClear);
 	
 	}
