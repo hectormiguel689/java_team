@@ -27,6 +27,7 @@ public class LoginDialog extends JFrame {
 	private String DEFAULTUSER = "hector689";
 	private String DEFAULTPASS = "123456";
 	private boolean isGranted = false;
+	static LoginDialog frame = new LoginDialog();
 
 	/**
 	 * Launch the application.
@@ -35,7 +36,7 @@ public class LoginDialog extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginDialog frame = new LoginDialog();
+					
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -108,8 +109,25 @@ public class LoginDialog extends JFrame {
 		getContentPane().add(btnLogin);
 		
 		JButton btnCancel = new JButton("CANCEL");
+		btnCancel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frame.dispose();
+			}
+		});
 		btnCancel.setBounds(219, 188, 114, 25);
 		getContentPane().add(btnCancel);
+		
+		JButton btnClear = new JButton("Clear");
+		btnClear.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtUsername.setText("");
+				pwdPassword.setText("");
+			}
+		});
+		btnClear.setBounds(158, 225, 114, 25);
+		getContentPane().add(btnClear);
 	
 	}
 
