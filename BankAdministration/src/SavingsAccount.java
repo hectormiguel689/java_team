@@ -5,7 +5,7 @@ public class SavingsAccount extends BankAccount {
 	
 	
 	SavingsAccount(){
-		
+		super();
 	}
 	SavingsAccount(String name, Double accountBalance){
 		super(name,accountBalance);
