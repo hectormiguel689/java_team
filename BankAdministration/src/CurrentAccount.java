@@ -6,4 +6,9 @@ public class CurrentAccount extends BankAccount {
 	CurrentAccount(){
 		super();
 	}
+	CurrentAccount(String name, Double accountBalance){
+		super(name, accountBalance);
+	}
+	
+	
 }
