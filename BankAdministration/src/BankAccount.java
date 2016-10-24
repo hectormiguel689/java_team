@@ -3,6 +3,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class BankAccount {
+	private static final String ACCOUNT_TYPE = "Regular";
 	private String name;
 	private Integer accountID;
 	private Double accountBalance;
@@ -13,7 +14,6 @@ public class BankAccount {
 	private Boolean isError;
 	
 	BankAccount(){
-
 		JOptionPane.showConfirmDialog(null, "You can not create an Account without account Holder Information.","ERROR!",JOptionPane.OK_OPTION);
 		isError = true;
 	}
@@ -64,7 +64,76 @@ public class BankAccount {
 		
 		return username;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Double getAccountBalance() {
+		return accountBalance;
+	}
+	public void setAccountBalance(Double accountBalance) {
+		this.accountBalance = accountBalance;
+	}
+	public static Double getAnnualInterestRate() {
+		return annualInterestRate;
+	}
+	public static void setAnnualInterestRate(Double annualInterestRate) {
+		BankAccount.annualInterestRate = annualInterestRate;
+	}
+	public Integer getAccountID() {
+		return accountID;
+	}
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public String getPassword() {
+		return Password;
+	}
+	public Boolean getIsError() {
+		return isError;
+	}
 	
-	
-	
+	public Double getMonthlyInterest(){
+		return annualInterestRate / 12;
+	}
+	public String getAccountType(){
+		return ACCOUNT_TYPE;
+	}
+	public void withdraw(Double amount){
+		if(amount < 1){
+			isError = true;
+			JOptionPane.showConfirmDialog(null, "WithDraw Amount must be Greater than 0","ERROR",JOptionPane.OK_OPTION);
+			
+		}
+		else if(this.accountBalance < amount){
+			isError = true;
+			JOptionPane.showConfirmDialog(null,"Insufficient Founds in Account " + accountID + "\nCurrent Balance: " + accountBalance,"ERROR",JOptionPane.OK_OPTION);
+		}
+		else
+			accountBalance -= amount;
+	}
+	public void Deposit(Double amount){
+		if(amount < 1){
+			isError = true;
+			JOptionPane.showConfirmDialog(null, "Deposit Amount must be Greater than 0","ERROR",JOptionPane.OK_OPTION);
+		}
+		else{
+			accountBalance += amount;
+		}
+	}
+	public String accountInfo(){
+		return ("Account Type: " + ACCOUNT_TYPE +
+				"\nAccount ID: " + accountID + 
+				"\nAccount Holder: " + name +
+				"\nAccount Balance: " + accountBalance +
+				"\nAccount Username: " + username + 
+				"\nAccount Password: " + Password + 
+				"\nMonthly Interest Rate: " + getMonthlyInterest() +
+				"\nDate Created: " + dateCreated);
+	}
 }
