@@ -6,7 +6,6 @@ public class Bank {
 	protected ArrayList<BankAccount> bankAccounts =  new ArrayList<BankAccount>();
 	private Integer REGULAR = 1;
 	private Integer SAVINGS = 2;
-	private Integer CURRENT = 3;
 	protected Boolean error;
 	
 	public void openAccount(Integer accountType, String name, Double initBalance){
@@ -36,9 +35,20 @@ public class Bank {
 		
 	}
 	
-	
-	
-	
+	public void updateAccounts(){
+		for (int i = 0; i < bankAccounts.size();i++){
+			if(bankAccounts.get(i) instanceof SavingsAccount){
+				((SavingsAccount) bankAccounts.get(i)).addInterest();
+			}
+			else if(bankAccounts.get(i) instanceof CurrentAccount){
+				if(bankAccounts.get(i).getAccountBalance() < 0){
+					JOptionPane.showConfirmDialog(null, "Account: "  + bankAccounts.get(i).getAccountID() + " belonging to " + bankAccounts.get(i).getName()
+							+ " is currently overdrafted. Current Account Balance: " + bankAccounts.get(i).getAccountBalance(),
+							"Account Overfrafted", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		}
+	}
 	
 	public String accountInfo(Integer Index){
 			return ("Account Type: " + bankAccounts.get(Index).getAccountType() +
