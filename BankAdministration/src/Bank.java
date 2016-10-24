@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class Bank {
-	protected ArrayList<BankAccount> bankAccounts =  new ArrayList<BankAccount>();
+	protected static ArrayList<BankAccount> bankAccounts =  new ArrayList<BankAccount>();
 	private Integer REGULAR = 1;
 	private Integer SAVINGS = 2;
 	protected Boolean error;
@@ -67,6 +67,9 @@ public class Bank {
 		}
 		return accountsInfo;
 		
+	}
+	public Boolean getError() {
+		return error;
 	}
 	
 	

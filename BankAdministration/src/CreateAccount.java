@@ -15,7 +15,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JTextArea;
 import java.awt.Color;
 
-public class CreateAccount {
+public class CreateAccount extends Bank {
 
 	protected JFrame frame;
 	private JTextField name;
@@ -48,6 +48,7 @@ public class CreateAccount {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("deprecation")
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setEnabled(false);
@@ -91,21 +92,70 @@ public class CreateAccount {
 		
 		JButton createAccount = new JButton("Create Account");
 		createAccount.addMouseListener(new MouseAdapter() {
+			
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Double startBalance = null; 
 				if(regular.isSelected()){
+					try{
+					startBalance = Double.parseDouble(initBalance.getText());
+					}
+					catch(NumberFormatException exception){
+						errorMessage.show();
+						errorMessage.setText("The Input for Initial Balance is not Correct, Please enter a Number for Initial Balance.");
+						initBalance.setText("");
+					}
+					if(name.getText().isEmpty()){
+						errorMessage.show();
+						errorMessage.setText("Please Enter A Valid Name!");
+					}
 					
+					else{
+						Bank.bankAccounts.add(new BankAccount(name.getText(),startBalance));
+					}
 				}
 				else if(savings.isSelected()){
-					
+					try{
+						startBalance = Double.parseDouble(initBalance.getText());
+						}
+						catch(NumberFormatException exception){
+							errorMessage.show();
+							errorMessage.setText("The Input for Initial Balance is not Correct, Please enter a Number for Initial Balance.");
+							initBalance.setText("");
+						}
+						if(name.getText().isEmpty()){
+							errorMessage.show();
+							errorMessage.setText("Please Enter A Valid Name!");
+						}
+						
+						else{
+							Bank.bankAccounts.add(new SavingsAccount(name.getText(),startBalance));
+						}
 				}
 				else if(current.isSelected()){
-					
+					try{
+						startBalance = Double.parseDouble(initBalance.getText());
+						}
+						catch(NumberFormatException exception){
+							errorMessage.show();
+							errorMessage.setText("The Input for Initial Balance is not Correct, Please enter a Number for Initial Balance.");
+							initBalance.setText("");
+						}
+						if(name.getText().isEmpty()){
+							errorMessage.show();
+							errorMessage.setText("Please Enter A Valid Name!");
+						}
+						
+						else{
+							Bank.bankAccounts.add(new CurrentAccount(name.getText(),startBalance));
+						}
 				}
 				else{
 					errorMessage.show();
 				}
+						
 			}
+			
 		});
 		createAccount.setBounds(38, 177, 145, 25);
 		frame.getContentPane().add(createAccount);

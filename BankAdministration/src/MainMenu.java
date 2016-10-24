@@ -5,9 +5,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Color;
 
 public class MainMenu {
-	static MainMenu window = new MainMenu();
+	static MainMenu window;
 
 	protected JFrame frame;
 
@@ -18,7 +19,7 @@ public class MainMenu {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
+					window = new MainMenu();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,6 +31,7 @@ public class MainMenu {
 	/**
 	 * Create the application.
 	 */
+	
 	public MainMenu() {
 		initialize();
 	}
@@ -39,6 +41,8 @@ public class MainMenu {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setBackground(Color.CYAN);
+		frame.getContentPane().setBackground(Color.GREEN);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -48,6 +52,13 @@ public class MainMenu {
 		frame.getContentPane().add(lblWhatWouldYou);
 		
 		JButton btnCreateNewAccount = new JButton("Create New Account");
+		btnCreateNewAccount.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				CreateAccount create = new CreateAccount();
+				create.frame.setVisible(true);
+			}
+		});
 		btnCreateNewAccount.setBounds(94, 67, 244, 25);
 		frame.getContentPane().add(btnCreateNewAccount);
 		
@@ -67,6 +78,7 @@ public class MainMenu {
 		btnLogout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				window.frame.dispose();
 				LoginWIndow login = new LoginWIndow();
 				EventQueue.invokeLater(new Runnable() {
 					
@@ -81,8 +93,9 @@ public class MainMenu {
 						}
 					}
 					});
-				window.frame.dispose();
+				
 			}
+		
 		});
 		btnLogout.setBounds(34, 209, 114, 25);
 		frame.getContentPane().add(btnLogout);
