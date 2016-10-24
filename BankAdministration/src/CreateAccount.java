@@ -15,9 +15,10 @@ import java.awt.event.MouseEvent;
 
 public class CreateAccount {
 
-	private JFrame frame;
+	protected JFrame frame;
 	private JTextField name;
 	private JTextField initBalance;
+	static CreateAccount window;
 
 	/**
 	 * Launch the application.
@@ -26,7 +27,7 @@ public class CreateAccount {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CreateAccount window = new CreateAccount();
+					window = new CreateAccount();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
