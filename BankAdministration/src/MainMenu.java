@@ -67,7 +67,6 @@ public class MainMenu {
 		btnLogout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				window.frame.dispose();
 				LoginWIndow login = new LoginWIndow();
 				EventQueue.invokeLater(new Runnable() {
 					
@@ -82,6 +81,7 @@ public class MainMenu {
 						}
 					}
 					});
+				window.frame.dispose();
 			}
 		});
 		btnLogout.setBounds(34, 209, 114, 25);
