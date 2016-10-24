@@ -100,8 +100,7 @@ public class LoginWIndow {
 				String password = pwdPassword.getText();
 				if(username.equals(DEFAULTUSER) && password.equals(DEFAULTPASS)){
 					Access.setText("Access Granted!");
-					isGranted = true;
-					window.frame.setVisible(false);
+					
 					
 				}
 				
