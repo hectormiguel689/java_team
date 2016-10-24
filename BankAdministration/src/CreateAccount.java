@@ -12,6 +12,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextArea;
+import java.awt.Color;
 
 public class CreateAccount {
 
@@ -48,19 +50,24 @@ public class CreateAccount {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setEnabled(false);
+		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JRadioButton regular = new JRadioButton("Regular");
-		regular.setBounds(0, 0, 145, 55);
+		regular.setBackground(Color.LIGHT_GRAY);
+		regular.setBounds(8, 0, 137, 55);
 		frame.getContentPane().add(regular);
 		
 		JRadioButton savings = new JRadioButton("Savings");
+		savings.setBackground(Color.LIGHT_GRAY);
 		savings.setBounds(150, 0, 145, 55);
 		frame.getContentPane().add(savings);
 		
 		JRadioButton current = new JRadioButton("Current");
+		current.setBackground(Color.LIGHT_GRAY);
 		current.setBounds(300, 0, 150, 55);
 		frame.getContentPane().add(current);
 		
@@ -72,11 +79,44 @@ public class CreateAccount {
 		lblInitialBalance.setBounds(21, 103, 124, 15);
 		frame.getContentPane().add(lblInitialBalance);
 		
+		JTextArea errorMessage = new JTextArea();
+		errorMessage.hide();
+		errorMessage.setForeground(Color.RED);
+		errorMessage.setBackground(Color.LIGHT_GRAY);
+		errorMessage.setLineWrap(true);
+		errorMessage.setEditable(false);
+		errorMessage.setText("Please make sure you selected an account type, entered your name, and an initial balance");
+		errorMessage.setBounds(42, 132, 373, 33);
+		frame.getContentPane().add(errorMessage);
+		
 		JButton createAccount = new JButton("Create Account");
+		createAccount.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(regular.isSelected()){
+					
+				}
+				else if(savings.isSelected()){
+					
+				}
+				else if(current.isSelected()){
+					
+				}
+				else{
+					errorMessage.show();
+				}
+			}
+		});
 		createAccount.setBounds(38, 177, 145, 25);
 		frame.getContentPane().add(createAccount);
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				window.frame.dispose();
+			}
+		});
 		btnCancel.setBounds(301, 177, 114, 25);
 		frame.getContentPane().add(btnCancel);
 		
@@ -105,5 +145,6 @@ public class CreateAccount {
 		});
 		btnClear.setBounds(181, 227, 114, 25);
 		frame.getContentPane().add(btnClear);
+				
 	}
 }
