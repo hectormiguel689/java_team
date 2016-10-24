@@ -15,15 +15,7 @@ public class SavingsAccount extends BankAccount {
 		monthlyInterest = getAccountBalance() * getMonthlyInterest();
 		Deposit(monthlyInterest);
 	}
-	
-	public String accountInfo(){
-		return ("Account Type: " + ACCOUNT_TYPE +
-				"\nAccount ID: " + getAccountID() + 
-				"\nAccount Holder: " + getName() +
-				"\nAccount Balance: " + getAccountBalance() +
-				"\nAccount Username: " + getUsername() + 
-				"\nAccount Password: " + getPassword() + 
-				"\nMonthly Interest Rate: " + getMonthlyInterest() +
-				"\nDate Created: " + getDateCreated());
+	public String getAccountType(){
+		return ACCOUNT_TYPE;
 	}
 }

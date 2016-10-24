@@ -11,7 +11,7 @@ public class BankAccount {
 	private String username;
 	private String Password;
 	private static Double annualInterestRate;
-	private Boolean isError;
+	protected Boolean isError;
 	
 	BankAccount(){
 		JOptionPane.showConfirmDialog(null, "You can not create an Account without account Holder Information.","ERROR!",JOptionPane.OK_OPTION);
@@ -126,14 +126,5 @@ public class BankAccount {
 			accountBalance += amount;
 		}
 	}
-	public String accountInfo(){
-		return ("Account Type: " + ACCOUNT_TYPE +
-				"\nAccount ID: " + accountID + 
-				"\nAccount Holder: " + name +
-				"\nAccount Balance: " + accountBalance +
-				"\nAccount Username: " + username + 
-				"\nAccount Password: " + Password + 
-				"\nMonthly Interest Rate: " + getMonthlyInterest() +
-				"\nDate Created: " + dateCreated);
-	}
+	
 }

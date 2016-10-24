@@ -40,7 +40,7 @@ public class LoginWIndow {
 				});
 			window.frame.setVisible(false);
 		}while(isGranted);
-		System.out.println("test");
+		
 	}
 
 	/**
@@ -97,6 +97,7 @@ public class LoginWIndow {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String username = txtUsername.getText();
+				@SuppressWarnings("deprecation")
 				String password = pwdPassword.getText();
 				if(username.equals(DEFAULTUSER) && password.equals(DEFAULTPASS)){
 					Access.setText("Access Granted!");
