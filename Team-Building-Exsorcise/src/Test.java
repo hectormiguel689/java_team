@@ -18,6 +18,7 @@ public class Test {
 			Employee hector3 = new Employee(name,addr,phnmbr,email,offcehr,salary);
 			Faculty hector4 = new Faculty(name,addr,phnmbr,email,offcenmbr,salary,offcehr,rank);
 			Staff hector5 = new Staff(name, addr, phnmbr, email,offcenmbr,salary,rank);
+			Staff carlos = new Staff("carlos", addr,phnmbr,email,offcenmbr,salary,rank);
 			
 			System.out.println(hector);
 			System.out.println(hector2);
