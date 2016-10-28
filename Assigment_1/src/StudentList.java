@@ -1,7 +1,5 @@
 import javax.swing.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
@@ -20,12 +18,13 @@ public class StudentList {
             File inputFile = fileChooser.getSelectedFile();
             try {
                 Scanner input = new Scanner(inputFile);
-                input.useDelimiter("|");
+
                 while(input.hasNext()) {
-                    String name = input.next();
-                    String grade1 = input.next();
-                    String grade2 = input.next();
-                    String grade3 = input.next();
+                    String line = input.nextLine();
+                    String name = getData(line,0);
+                    String grade1 = getData(line, 1);
+                    String grade2 = getData(line, 2);
+                    String grade3 = getData(line, 3);
                     try {
                         students.add(new Student(name,
                                 Integer.parseInt(grade1),
@@ -51,8 +50,8 @@ public class StudentList {
         if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
             File outFile = fileChooser.getSelectedFile();
             try {
-                PrintWriter output = new PrintWriter(outFile);
-                output.println("Name \t\t Grade 1 \t Grade 2 \t Grade 3 \t Average \t\t Status");
+                FileWriter output = new FileWriter(outFile);
+                output.write("Name \t\t Grade 1 \t\t Grade 2 \t\t Grade 3 \t\t\t Average \t\t Status");
                 for(int i = 0; i < students.size(); i++){
                     String name = students.get(i).getName();
                     int grade1  = students.get(i).getGrade1();
@@ -60,7 +59,14 @@ public class StudentList {
                     int grade3  = students.get(i).getGrade3();
                     double average = students.get(i).getAverage();
                     String status = students.get(i).getStatus();
-                    output.println( name + "\t\t" +
+                    String data = name + "\t\t" +
+                            grade1 + "\t" +
+                            grade2 + "\t" +
+                            grade3 + "\t" +
+                            average + "\t\t" +
+                            status;
+                    output.write(data);
+                    System.out.println(name + "\t\t" +
                             grade1 + "\t" +
                             grade2 + "\t" +
                             grade3 + "\t" +
@@ -69,9 +75,17 @@ public class StudentList {
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
         }
+    }
+
+    private String getData(String line, int Index){
+        String[] seperateParts = line.split("\\W+");
+
+        return  seperateParts[Index];
     }
 
 }
