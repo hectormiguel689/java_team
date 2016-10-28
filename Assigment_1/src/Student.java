@@ -80,7 +80,8 @@ public class Student implements Comparable {
             return "Passing";
     }
     //CompareTo Method  -Hector
-    public int compareTo(Student o){
-        return (this.average).compareTo(o.average);
+    @Override
+    public int compareTo(Object o) {
+        return (this.average).compareTo(((Student)o).average);
     }
 }
