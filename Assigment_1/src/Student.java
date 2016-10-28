@@ -1,6 +1,17 @@
-/**
- * Created by hector on 10/27/16.
- */
+/*---------------------------------------------------
+        Group Members:  Brian Delgado, Hector Ramirez
+
+        Student IDs: Student IDs of Group members
+
+        COP 2805C – Java Programming 2
+
+        Fall 2016 - T Th 6:00PM - 9:20PM
+
+        Project # 1
+
+        Plagiarism Statement: I certify that this assignment is my own work and that I have not copied in part or whole or otherwise plagiarized the work of other students and/or persons.
+
+        ----------------------------------------------------------*/
 public class Student implements Comparable {
     private String name;
     private String status;
