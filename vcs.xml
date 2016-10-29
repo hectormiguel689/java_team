@@ -14,8 +14,12 @@
           <option name="url" value="https://github.com/hectormiguel689/java-projects" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/briandel95/java-projects.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
-    <option name="cloneParentDir" value="$USER_HOME$" />
+    <option name="cloneParentDir" value="$USER_HOME$/java-projectsReal" />
   </component>
 </application>
