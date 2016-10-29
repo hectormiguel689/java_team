@@ -11,7 +11,8 @@ public class Test {
 			double salary = 65031.32;
 			String offcehr = "8:00AM - 10:00PM";
 			String rank = "Prof";
-			String title = "Janitor";
+			String title = "Jantor";
+
 			
 			Person hector = new Person(name,addr,phnmbr,email);
 			Student hector2 = new Student(name,addr,phnmbr,email);
@@ -19,6 +20,7 @@ public class Test {
 			Faculty hector4 = new Faculty(name,addr,phnmbr,email,offcenmbr,salary,offcehr,rank);
 			Staff hector5 = new Staff(name, addr, phnmbr, email,offcenmbr,salary,rank);
 			Staff carlos2 = new Staff("carlos", addr,phnmbr,email,offcenmbr,salary,rank);
+			Person brain = new Person("Brian",addr,phnmbr,email);
 			
 			System.out.println(hector);
 			System.out.println(hector2);
@@ -26,6 +28,7 @@ public class Test {
 			System.out.println(hector4);
 			System.out.println(hector5);
 			System.out.println(carlos2);
+			System.out.println(brain);
 			
 	}
 
