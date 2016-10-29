@@ -11,7 +11,7 @@ public class Test {
 			double salary = 65031.32;
 			String offcehr = "8:00AM - 10:00PM";
 			String rank = "Prof";
-			String title = "Janitor";
+			String title = "Jantor";
 
 			
 			Person hector = new Person(name,addr,phnmbr,email);
