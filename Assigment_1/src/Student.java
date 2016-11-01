@@ -1,22 +1,11 @@
-/*---------------------------------------------------
-        Group Members:  Brian Delgado, Hector Ramirez
-
-        Student IDs: Student IDs of Group members
-
-        COP 2805C – Java Programming 2
-
-        Fall 2016 - T Th 6:00PM - 9:20PM
-
-        Project # 1
-
-        Plagiarism Statement: I certify that this assignment is my own work and that I have not copied in part or whole or otherwise plagiarized the work of other students and/or persons.
-
-        ----------------------------------------------------------*/
+/**
+ * Created by brian on 10/30/16.
+ */
 public class Student implements Comparable {
     private String name;
     private String status;
     private int grade1;
-    private int greade2;
+    private int grade2;
     private int grade3;
     private Double average;
 
@@ -24,7 +13,7 @@ public class Student implements Comparable {
     public Student(String name, int grade1, int grade2, int grade3) {
         this.name = name;
         this.grade1 = grade1;
-        this.greade2 = greade2;
+        this.grade2 = grade2;
         this.grade3 = grade3;
         this.average = computeAverage(grade1, grade2, grade3);
         this.status = computeStatus(average);
@@ -55,12 +44,12 @@ public class Student implements Comparable {
         this.grade1 = grade1;
     }
 
-    public int getGreade2() {
-        return greade2;
+    public int getGrade2() {
+        return grade2;
     }
 
-    public void setGreade2(int greade2) {
-        this.greade2 = greade2;
+    public void setGrade2(int grade2) {
+        this.grade2 = grade2;
     }
 
     public int getGrade3() {
@@ -86,7 +75,7 @@ public class Student implements Comparable {
     //Computes Averge -Hector
     private String computeStatus(double average){
         if(average < 70)
-            return "Failling";
+            return "Failing";
         else
             return "Passing";
     }
