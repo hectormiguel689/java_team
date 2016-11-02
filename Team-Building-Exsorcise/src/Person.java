@@ -1,5 +1,5 @@
 
-public class Person {
+public class Person implements Comparable<Person> {
 	private String name;
 	private String address;
 	private String phoneNumber;
@@ -45,6 +45,16 @@ public class Person {
 	public String toString() {
 		return "CLASS Person [name=" + name + "]";
 	}
-	
+
+	public void bubbleSort(){
+
+	}
+
+	@Override
+	public int compareTo(Person person) {
+		return this.name.compareTo(person.name);
+	}
+
+
 	
 }

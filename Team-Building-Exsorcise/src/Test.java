@@ -1,3 +1,4 @@
+;import java.util.ArrayList;
 
 public class Test {
 
@@ -13,23 +14,35 @@ public class Test {
 			String rank = "Prof";
 			String title = "Jantor";
 
+			Person[] person = new Person[5];
 			
-			Person hector = new Person(name,addr,phnmbr,email);
-			Student hector2 = new Student(name,addr,phnmbr,email);
-			Employee hector3 = new Employee(name,addr,phnmbr,email,offcehr,salary);
-			Faculty hector4 = new Faculty(name,addr,phnmbr,email,offcenmbr,salary,offcehr,rank);
-			Staff hector5 = new Staff(name, addr, phnmbr, email,offcenmbr,salary,rank);
-			Staff carlos2 = new Staff("carlos", addr,phnmbr,email,offcenmbr,salary,rank);
-			Person brain = new Person("Brian",addr,phnmbr,email);
-			
-			System.out.println(hector);
-			System.out.println(hector2);
-			System.out.println(hector3);
-			System.out.println(hector4);
-			System.out.println(hector5);
-			System.out.println(carlos2);
-			System.out.println(brain);
-			
+			person[0] = ( new Person("John",addr,phnmbr,email));
+            person[1] =  (new Person("Brian",addr,phnmbr,email));
+            person[2] = ( new Person("Hector",addr,phnmbr,email));
+            person[3] = ( new Person("Cruz",addr,phnmbr,email));
+            person[4] = ( new Person("Lopez",addr,phnmbr,email));
+
+            boubble_sort(person);
+
+        for(int i =0;i < person.length;i++){
+            System.out.println(person[i]);
+        }
+
 	}
 
+	private static void boubble_sort(Person[] personList){
+        Boolean swap;
+        do{
+            swap = false;
+            for(int i = 0;i < personList.length -1;i++){
+                if(personList[i].compareTo(personList[i+1]) > 0 ){
+                  Person temp = personList[i];
+                    personList[i] = personList[i+1];
+                    personList[i+1] = temp;
+                    swap = true;
+                }
+            }
+
+        }while(swap);
+    }
 }

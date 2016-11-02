@@ -1,7 +1,7 @@
 /**
  * Created by brian on 10/30/16.
  */
-public class Student implements Comparable {
+public class Student implements Comparable<Student> {
     private String name;
     private String status;
     private int grade1;
@@ -81,7 +81,7 @@ public class Student implements Comparable {
     }
     //CompareTo Method  -Hector
     @Override
-    public int compareTo(Object o) {
+    public int compareTo(Student o) {
         return (this.average).compareTo(((Student)o).average);
     }
 }
