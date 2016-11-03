@@ -3,10 +3,7 @@
  */
 import javax.swing.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by hector on 10/28/16.
@@ -45,17 +42,17 @@ public class StudentList {
 
         }
     }
-
     public void sortStudents(){
-        students.sort(Comparator.comparing(Student::getAverage).reversed());
+       students = mergeSort(students);
     }
+
 
     public void writeStudents(){
         if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
             File outFile = fileChooser.getSelectedFile();
             try {
                 PrintWriter output = new PrintWriter(outFile);
-                output.println("Name \t\t Grade 1 \t\t Grade 2 \t\t Grade 3 \t\t\t Average \t\t Status\n");
+                output.printf("%-10s %8s %8s %8s %10s %10s\n", "Name", "Grade 1", "Grade 2", "Grade 3", "Average", "Status");
                 for(int i = 0; i < students.size(); i++){
                     /*  Too much code..
                     String name = students.get(i).getName();
@@ -79,19 +76,21 @@ public class StudentList {
                             status);
                     */
 
-                    output.print(students.get(i).getName() + "\t\t ");
-                    output.print(students.get(i).getGrade1() + " \t\t\t ");
-                    output.print(students.get(i).getGrade2() + " \t\t\t ");
-                    output.print(students.get(i).getGrade3() + " \t\t\t\t ");
-                    output.print(students.get(i).getAverage() + " \t\t\t ");
-                    output.print(students.get(i).getStatus() + "\n");
+                   output.printf("%-10s %8s %8s %8s %10s %10s\n", students.get(i).getName(), students.get(i).getGrade1(),
+                           students.get(i).getGrade2(),students.get(i).getGrade3(),students.get(i).getAverage(),
+                           students.get(i).getStatus());
+
+
+
+
+
                 }
                 output.close();
 
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                JOptionPane.showConfirmDialog(null,"Error in Opening the File","Error",JOptionPane.OK_CANCEL_OPTION);
             } catch (IOException e) {
-                e.printStackTrace();
+                JOptionPane.showConfirmDialog(null,"Error in Opening the File","Error",JOptionPane.OK_CANCEL_OPTION);
             }
 
         }
@@ -103,4 +102,68 @@ public class StudentList {
         return  seperateParts[Index];
     }
 
+
+
+
+    private ArrayList<Student> mergeSort(ArrayList<Student> temp) {
+            //students.sort(Comparator.comparing(Student::getAverage).reversed()); --This is the K.I.S.S way, but you want it the hard way...
+        ArrayList<Student> list1 = new ArrayList<Student>();
+        ArrayList<Student> list2 = new ArrayList<Student>();
+        int center;
+
+        if(temp.size() == 1)
+            return temp;
+        else{
+            center = temp.size()/2;
+            for(int i = 0; i < center;i++){
+                list1.add(temp.get(i));
+            }
+            for(int i = center; i < temp.size();i++){
+                list2.add(temp.get(i));
+            }
+
+            list1 = mergeSort(list1);
+            list2 = mergeSort(list2);
+            merge(list1,list2,temp);
+        }
+
+        return temp;
+    }
+
+    private void merge(ArrayList<Student> list1, ArrayList<Student> list2, ArrayList<Student> temp) {
+        int counter1 = 0;
+        int counter2 = 0;
+        int counter3 = 0;
+
+        while (counter1 < list1.size() && counter2 < list2.size()) {
+            if ( (list1.get(counter1).getAverage().compareTo(list2.get(counter2).getAverage())) > 0) {
+                temp.set(counter3, list1.get(counter1));
+                counter1++;
+            }
+            else {
+                temp.set(counter3, list2.get(counter2));
+                counter2++;
+            }
+            counter3++;
+        }
+        ArrayList<Student> remaining;
+        int remaindingCounter;
+        if (counter1 >= list1.size()) {
+
+            remaining = list2;
+            remaindingCounter = counter2;
+        }
+        else {
+
+            remaining = list1;
+            remaindingCounter = counter1;
+        }
+
+        for (int i=remaindingCounter; i<remaining.size(); i++) {
+            temp.set(counter3, remaining.get(i));
+            counter3++;
+        }
+    }
+
 }
+

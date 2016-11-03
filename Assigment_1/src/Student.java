@@ -60,7 +60,7 @@ public class Student implements Comparable<Student> {
         this.grade3 = grade3;
     }
 
-    public double getAverage() {
+    public Double getAverage() {
         return average;
     }
 
