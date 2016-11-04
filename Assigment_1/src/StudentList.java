@@ -1,18 +1,27 @@
-/**
- * Created by brian on 10/30/16.
- */
+/*---------------------------------------------------
+ Group Members:  Brian Delgado, Ileana Manzano, Hector Ramirez
+
+ Student IDs: 1001324591,1001033660,1001095960
+
+ COP 2805C – Java Programming 2
+
+ Fall 2016 - T Th 6:00PM - 9:20PM
+
+ Project # 1
+
+ Plagiarism Statement: I certify that this assignment is my own work and that I have not copied in part or
+ whole or otherwise plagiarized the work of other students and/or persons.
+
+----------------------------------------------------------*/
 import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
-/**
- * Created by hector on 10/28/16.
- */
 public class StudentList {
     private ArrayList<Student> students = new ArrayList<Student>();
-    private JFileChooser fileChooser = new JFileChooser();
+    private JFileChooser fileChooser    = new JFileChooser();
 
-    //Reads Students from the File. -Hector
+    //Reads Student Info from the File. -Hector
     public void readStudents(){
 
         if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
@@ -42,71 +51,45 @@ public class StudentList {
 
         }
     }
+    //Sort the ArrayList.
     public void sortStudents(){
        students = mergeSort(students);
     }
 
-
+    //Writes the ArrayList to the File.
     public void writeStudents(){
-        if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
+        if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             File outFile = fileChooser.getSelectedFile();
             try {
                 PrintWriter output = new PrintWriter(outFile);
                 output.printf("%-10s %8s %8s %8s %10s %10s\n", "Name", "Grade 1", "Grade 2", "Grade 3", "Average", "Status");
-                for(int i = 0; i < students.size(); i++){
-                    /*  Too much code..
-                    String name = students.get(i).getName();
-                    int grade1  = students.get(i).getGrade1();
-                    int grade2  = students.get(i).getGreade2();
-                    int grade3  = students.get(i).getGrade3();
-                    double average = students.get(i).getAverage();
-                    String status = students.get(i).getStatus();
-                    String data = name + "\t\t" +
-                            grade1 + "\t" +
-                            grade2 + "\t" +
-                            grade3 + "\t" +
-                            average + "\t\t" +
-                            status;
-                    output.print(data);
-                    System.out.println(name + "\t\t" +
-                            grade1 + "\t" +
-                            grade2 + "\t" +
-                            grade3 + "\t" +
-                            average + "\t\t" +
-                            status);
-                    */
+                for (int i = 0; i < students.size(); i++) {
 
-                   output.printf("%-10s %8s %8s %8s %10s %10s\n", students.get(i).getName(), students.get(i).getGrade1(),
-                           students.get(i).getGrade2(),students.get(i).getGrade3(),students.get(i).getAverage(),
-                           students.get(i).getStatus());
-
-
-
+                    output.printf("%-10s %8s %8s %8s %10s %10s\n", students.get(i).getName(), students.get(i).getGrade1(),
+                            students.get(i).getGrade2(), students.get(i).getGrade3(), students.get(i).getAverage(),
+                            students.get(i).getStatus());
 
 
                 }
                 output.close();
 
             } catch (FileNotFoundException e) {
-                JOptionPane.showConfirmDialog(null,"Error in Opening the File","Error",JOptionPane.OK_CANCEL_OPTION);
-            } catch (IOException e) {
-                JOptionPane.showConfirmDialog(null,"Error in Opening the File","Error",JOptionPane.OK_CANCEL_OPTION);
+                JOptionPane.showConfirmDialog(null, "Error in Opening the File", "Error", JOptionPane.OK_CANCEL_OPTION);
             }
-
         }
     }
 
+    //used to split the String and return the section of the string requested.
     private String getData(String line, int Index){
-        String[] seperateParts = line.split("\\W+");
+        String[] separateParts = line.split("\\W+");
 
-        return  seperateParts[Index];
+        return  separateParts[Index];
     }
 
-
-
-
+    //Gets an Array List of Obejects and splits it down into single block lists.
     private ArrayList<Student> mergeSort(ArrayList<Student> temp) {
             //students.sort(Comparator.comparing(Student::getAverage).reversed()); --This is the K.I.S.S way, but you want it the hard way...
+      //Creates the new 2 lists.
         ArrayList<Student> list1 = new ArrayList<Student>();
         ArrayList<Student> list2 = new ArrayList<Student>();
         int center;
@@ -121,15 +104,16 @@ public class StudentList {
             for(int i = center; i < temp.size();i++){
                 list2.add(temp.get(i));
             }
-
+            //If the incoming list is not of 1 item size, recursively return it to be broken down
             list1 = mergeSort(list1);
             list2 = mergeSort(list2);
+            //Calls the merge class to combine the single block items into a sorted ArrayList;
             merge(list1,list2,temp);
         }
-
+        //returns the resulting sorted list.
         return temp;
     }
-
+    //Gets 2 incoming ArrayList and merges them into a sorted Array list.
     private void merge(ArrayList<Student> list1, ArrayList<Student> list2, ArrayList<Student> temp) {
         int counter1 = 0;
         int counter2 = 0;
