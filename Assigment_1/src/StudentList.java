@@ -1,21 +1,27 @@
-/**
- * Created by brian on 10/30/16.
- */
+/*---------------------------------------------------
+ Group Members:  Brian Delgado, Ileana Manzano, Hector Ramirez
+
+ Student IDs: 1001324591,1001033660,1001095960
+
+ COP 2805C – Java Programming 2
+
+ Fall 2016 - T Th 6:00PM - 9:20PM
+
+ Project # 1
+
+ Plagiarism Statement: I certify that this assignment is my own work and that I have not copied in part or
+ whole or otherwise plagiarized the work of other students and/or persons.
+
+----------------------------------------------------------*/
 import javax.swing.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.util.*;
 
-/**
- * Created by hector on 10/28/16.
- */
 public class StudentList {
     private ArrayList<Student> students = new ArrayList<Student>();
-    private JFileChooser fileChooser = new JFileChooser();
+    private JFileChooser fileChooser    = new JFileChooser();
 
-    //Reads Students from the File. -Hector
+    //Reads Student Info from the File. -Hector
     public void readStudents(){
 
         if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
@@ -45,62 +51,103 @@ public class StudentList {
 
         }
     }
-
+    //Sort the ArrayList.
     public void sortStudents(){
-        students.sort(Comparator.comparing(Student::getAverage).reversed());
+       students = mergeSort(students);
     }
 
+    //Writes the ArrayList to the File.
     public void writeStudents(){
-        if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
+        if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             File outFile = fileChooser.getSelectedFile();
             try {
                 PrintWriter output = new PrintWriter(outFile);
-                output.println("Name \t\t Grade 1 \t\t Grade 2 \t\t Grade 3 \t\t\t Average \t\t Status\n");
-                for(int i = 0; i < students.size(); i++){
-                    /*  Too much code..
-                    String name = students.get(i).getName();
-                    int grade1  = students.get(i).getGrade1();
-                    int grade2  = students.get(i).getGreade2();
-                    int grade3  = students.get(i).getGrade3();
-                    double average = students.get(i).getAverage();
-                    String status = students.get(i).getStatus();
-                    String data = name + "\t\t" +
-                            grade1 + "\t" +
-                            grade2 + "\t" +
-                            grade3 + "\t" +
-                            average + "\t\t" +
-                            status;
-                    output.print(data);
-                    System.out.println(name + "\t\t" +
-                            grade1 + "\t" +
-                            grade2 + "\t" +
-                            grade3 + "\t" +
-                            average + "\t\t" +
-                            status);
-                    */
+                output.printf("%-10s %8s %8s %8s %10s %10s\n", "Name", "Grade 1", "Grade 2", "Grade 3", "Average", "Status");
+                for (int i = 0; i < students.size(); i++) {
 
-                    output.print(students.get(i).getName() + "\t\t ");
-                    output.print(students.get(i).getGrade1() + " \t\t\t ");
-                    output.print(students.get(i).getGrade2() + " \t\t\t ");
-                    output.print(students.get(i).getGrade3() + " \t\t\t\t ");
-                    output.print(students.get(i).getAverage() + " \t\t\t ");
-                    output.print(students.get(i).getStatus() + "\n");
+                    output.printf("%-10s %8s %8s %8s %10s %10s\n", students.get(i).getName(), students.get(i).getGrade1(),
+                            students.get(i).getGrade2(), students.get(i).getGrade3(), students.get(i).getAverage(),
+                            students.get(i).getStatus());
+
+
                 }
                 output.close();
 
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+                JOptionPane.showConfirmDialog(null, "Error in Opening the File", "Error", JOptionPane.OK_CANCEL_OPTION);
             }
-
         }
     }
 
+    //used to split the String and return the section of the string requested.
     private String getData(String line, int Index){
-        String[] seperateParts = line.split("\\W+");
+        String[] separateParts = line.split("\\W+");
 
-        return  seperateParts[Index];
+        return  separateParts[Index];
+    }
+
+    //Gets an Array List of Obejects and splits it down into single block lists.
+    private ArrayList<Student> mergeSort(ArrayList<Student> temp) {
+            //students.sort(Comparator.comparing(Student::getAverage).reversed()); --This is the K.I.S.S way, but you want it the hard way...
+      //Creates the new 2 lists.
+        ArrayList<Student> list1 = new ArrayList<Student>();
+        ArrayList<Student> list2 = new ArrayList<Student>();
+        int center;
+
+        if(temp.size() == 1)
+            return temp;
+        else{
+            center = temp.size()/2;
+            for(int i = 0; i < center;i++){
+                list1.add(temp.get(i));
+            }
+            for(int i = center; i < temp.size();i++){
+                list2.add(temp.get(i));
+            }
+            //If the incoming list is not of 1 item size, recursively return it to be broken down
+            list1 = mergeSort(list1);
+            list2 = mergeSort(list2);
+            //Calls the merge class to combine the single block items into a sorted ArrayList;
+            merge(list1,list2,temp);
+        }
+        //returns the resulting sorted list.
+        return temp;
+    }
+    //Gets 2 incoming ArrayList and merges them into a sorted Array list.
+    private void merge(ArrayList<Student> list1, ArrayList<Student> list2, ArrayList<Student> temp) {
+        int counter1 = 0;
+        int counter2 = 0;
+        int counter3 = 0;
+
+        while (counter1 < list1.size() && counter2 < list2.size()) {
+            if ( (list1.get(counter1).getAverage().compareTo(list2.get(counter2).getAverage())) > 0) {
+                temp.set(counter3, list1.get(counter1));
+                counter1++;
+            }
+            else {
+                temp.set(counter3, list2.get(counter2));
+                counter2++;
+            }
+            counter3++;
+        }
+        ArrayList<Student> remaining;
+        int remaindingCounter;
+        if (counter1 >= list1.size()) {
+
+            remaining = list2;
+            remaindingCounter = counter2;
+        }
+        else {
+
+            remaining = list1;
+            remaindingCounter = counter1;
+        }
+
+        for (int i=remaindingCounter; i<remaining.size(); i++) {
+            temp.set(counter3, remaining.get(i));
+            counter3++;
+        }
     }
 
 }
+

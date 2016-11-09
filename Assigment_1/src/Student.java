@@ -1,6 +1,18 @@
-/**
- * Created by brian on 10/30/16.
- */
+/*---------------------------------------------------
+ Group Members:  Brian Delgado, Ileana Manzano, Hector Ramirez
+
+ Student IDs: 1001324591,1001033660,1001095960
+
+ COP 2805C – Java Programming 2
+
+ Fall 2016 - T Th 6:00PM - 9:20PM
+
+ Project # 1
+
+ Plagiarism Statement: I certify that this assignment is my own work and that I have not copied in part or
+ whole or otherwise plagiarized the work of other students and/or persons.
+
+----------------------------------------------------------*/
 public class Student implements Comparable<Student> {
     private String name;
     private String status;
@@ -9,7 +21,7 @@ public class Student implements Comparable<Student> {
     private int grade3;
     private Double average;
 
-    //4-arg Consutructor -Hector
+    //4-arg Consutructor
     public Student(String name, int grade1, int grade2, int grade3) {
         this.name = name;
         this.grade1 = grade1;
@@ -19,7 +31,7 @@ public class Student implements Comparable<Student> {
         this.status = computeStatus(average);
     }
 
-    //Getters and Setters for all Fields -Hector
+    //Getters and Setters for all Fields
     public String getName() {
         return name;
     }
@@ -60,7 +72,7 @@ public class Student implements Comparable<Student> {
         this.grade3 = grade3;
     }
 
-    public double getAverage() {
+    public Double getAverage() {
         return average;
     }
 
@@ -68,18 +80,18 @@ public class Student implements Comparable<Student> {
         this.average = average;
     }
 
-    //Computes Avergae -Hector
+    //Computes Average
     private double computeAverage(int grade1, int grade2, int grade3){
         return (grade1 + grade2 + grade3) / 3;
     }
-    //Computes Averge -Hector
+    //Computes Average -Hector
     private String computeStatus(double average){
         if(average < 70)
             return "Failing";
         else
             return "Passing";
     }
-    //CompareTo Method  -Hector
+    //CompareTo Method
     @Override
     public int compareTo(Student o) {
         return (this.average).compareTo(((Student)o).average);
